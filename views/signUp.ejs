@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/signup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="/api/otp/generate-otp" method="POST" id="signUpForm">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required /><br />
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required /><br />
+
+        <label for="password">Password:</label>
+        <input type="text" name="password" required /><br />
+
+        <button type="submit">Get Otp</button>
+      </form>
+    </div>
+
+    <!-- <script>
+      document
+        .getElementById("signUpForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault(); // Prevent form submission
+
+          const username = event.target.username.value;
+          const email = event.target.email.value;
+          const password = event.target.password.value;
+
+          try {
+            const response = await fetch("/api/auth/signUp", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              // Optionally save token or redirect to login
+              window.location.href = "/api/auth/login"; // Redirect to login page after sign-up
+            } else {
+              alert(data.message); // Handle errors
+            }
+          } catch (error) {
+            console.error("Error signing up:", error);
+          }
+        });
+    </script> -->
+  </body>
+</html>

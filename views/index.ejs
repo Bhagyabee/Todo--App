@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/test.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav">
+        <a href="/api/auth/profile">Profile</a>
+      </div>
+      <div class="logout">
+        <a href="/api/auth/logout">logout</a>
+      </div>
+      <div class="home logout">
+        <a href="#"">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="input-todo">
+        <div><h1>Welcome, <%= user.username %>!</h1></div>
+        
+        <form action="/api/todo/add" method="POST">
+          <div class="input">
+            <input
+              type="text"
+              class="input"
+              name="newTodo"
+              id="input-task"
+              placeholder="Add a new Task"
+            />
+          </div>
+          <div class="add">
+            <button id="addbtn" type="submit">ADD</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="list">
+        <div class="list-heading">Todos</div>
+        <div class="line"></div>
+        <div>
+          
+          <ul id="items">
+            <% todos.forEach((todo) =>{ %>
+            <li
+              class="<%= todo.completed ? 'completed' : '' %>"
+              style="padding: 15px; margin: 10px"
+            >
+              <span><%= todo.text %></span>
+
+              <form
+                action="/api/todo/done"
+                method="POST"
+                style="display: inline; padding: 25px"
+              >
+                <input type="hidden" name="id" value="<%= todo._id %>" />
+                <button type="submit">Done</button>
+              </form>
+
+              <form
+                action="/api/todo/delete"
+                method="POST"
+                style="display: inline; padding: 25px"
+              >
+                <input type="hidden" name="id" value="<%= todo._id %>" />
+                <button type="submit">Delete</button>
+              </form>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
