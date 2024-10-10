@@ -11,7 +11,7 @@ const generateOtp = async (req, res) => {
   console.log(email);
   const existUser = await User.findOne({ email });
   if (existUser) {
-    return res.redirect("/");
+    return res.render("already");
   }
 
   const otp = otpGenerator.generate(6, {
@@ -53,7 +53,7 @@ const verifyOtp = async (req, res) => {
     const otpRecord = await OTP.findOne({ email, otp }).exec();
 
     if (!otpRecord) {
-      return res.status(400).send("Invalid OTP");
+      return res.render("invalidOtp.ejs");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
